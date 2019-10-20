@@ -1,14 +1,14 @@
 import React from 'react';
 
-export const ListComponent = ({ items }) => {
+export const ListComponent = ({ transactions }) => {
 
   return(
     <div className='App'>
-      <h1>List of Items</h1>
+      <h1>Transactions</h1>
 
-      {items.length ? (
+      {transactions.length ? (
         <div>
-          {items.map(({id, name}) => {
+          {transactions.map(({id, name}) => {
             return (<div key={id}>{ name }</div>);
           })}
         </div>

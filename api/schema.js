@@ -1,3 +1,5 @@
+const { TransactionResolver } = require("./resolvers/TransactionResolver");
+
 const { GraphQLObjectType,
         GraphQLSchema,
         GraphQLInt,
@@ -5,8 +7,8 @@ const { GraphQLObjectType,
         GraphQLList,
 } = require('graphql');
 
-const itemType = new GraphQLObjectType({
-  name: 'itemType',
+const transactionType = new GraphQLObjectType({
+  name: 'transactionType',
   fields: {
     id: { type: GraphQLInt },
     name: { type: GraphQLString },
@@ -16,11 +18,9 @@ const itemType = new GraphQLObjectType({
 const queryType = new GraphQLObjectType({
   name: 'Query',
   fields: {
-    items: {
-      type: GraphQLList(itemType),
-      resolve: function() {
-        return [{id: "1", name: 'Item1'}, {id: "2", name: 'Item2'}];
-      }
+    transactions: {
+      type: GraphQLList(transactionType),
+      resolve: TransactionResolver,
     }
   }
 });

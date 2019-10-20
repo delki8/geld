@@ -1,0 +1,3 @@
+module.exports = {
+  TransactionResolver: () => [{id: "1", name: 'Item1'}, {id: "2", name: 'Item2'}],
+};

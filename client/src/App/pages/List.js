@@ -3,9 +3,9 @@ import { ListComponent } from './ListComponent';
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from 'apollo-boost';
 
-const LIST_ITEMS = gql`
+const LIST_TRANSACTIONS = gql`
     {
-        items {
+        transactions {
             id
             name
         }
@@ -13,10 +13,10 @@ const LIST_ITEMS = gql`
 `;
 
 export const List = (props) => {
-  const { loading, error, data } = useQuery(LIST_ITEMS);
+  const { loading, error, data } = useQuery(LIST_TRANSACTIONS);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error...</p>;
   console.log(data);
-  return (<ListComponent items={data.items} {...props} />);
+  return (<ListComponent transactions={data.transactions} {...props} />);
 };
