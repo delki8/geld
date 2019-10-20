@@ -16,7 +16,7 @@ export const List = (props) => {
   const { loading, error, data } = useQuery(LIST_TRANSACTIONS);
 
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error...</p>;
+  if (error) return <p>{`Error: ${JSON.stringify(error)}`}</p>;
   console.log(data);
   return (<ListComponent transactions={data.transactions} {...props} />);
 };

@@ -1,3 +1,5 @@
+const { collections } = require('../../database');
+
 module.exports = {
-  TransactionResolver: () => [{id: "1", name: 'Item1'}, {id: "2", name: 'Item2'}],
+  all: () => collections['transaction'].find().toArray(),
 };

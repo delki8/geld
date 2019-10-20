@@ -1,4 +1,4 @@
-const { TransactionResolver } = require("./resolvers/TransactionResolver");
+const { all: allTransactions } = require("./resolvers/TransactionResolver");
 
 const { GraphQLObjectType,
         GraphQLSchema,
@@ -20,7 +20,7 @@ const queryType = new GraphQLObjectType({
   fields: {
     transactions: {
       type: GraphQLList(transactionType),
-      resolve: TransactionResolver,
+      resolve: allTransactions,
     }
   }
 });
