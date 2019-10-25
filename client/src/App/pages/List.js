@@ -6,7 +6,7 @@ import { gql } from 'apollo-boost';
 const LIST_TRANSACTIONS = gql`
     {
         transactions {
-            id
+            _id
             name
         }
     }
