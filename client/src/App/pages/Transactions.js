@@ -1,6 +1,16 @@
 import React from 'react';
-import gql from 'graphql-tag';
-import { useMutation } from '@apollo/react-hooks';
+
+import {useMutation, useQuery} from "@apollo/react-hooks";
+import { gql } from 'apollo-boost';
+
+const LIST_TRANSACTIONS = gql`
+    {
+        transactions {
+            _id
+            name
+        }
+    }
+`;
 
 const ADD_TRANSACTION = gql`
     mutation AddTransaction($transaction: inputTransactionType) {
@@ -11,21 +21,25 @@ const ADD_TRANSACTION = gql`
     }
 `;
 
-export const ListComponent = ({ transactions }) => {
+export const Transactions = () => {
+  const { loading, error, data } = useQuery(LIST_TRANSACTIONS);
+  const [addTransaction] = useMutation(ADD_TRANSACTION);
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>{`Error: ${JSON.stringify(error)}`}</p>;
+
   let input;
-  const [addTransaction, { data }] = useMutation(ADD_TRANSACTION);
   return(
     <div className='App'>
       <h1>Transactions</h1>
 
-      {transactions.length ? (
+      {data.transactions.length ? (
         <form onSubmit={e => {
           e.preventDefault();
           addTransaction({ variables: { transaction: { name: input.value } }});
           input.value = '';
         }}>
-          {transactions.map(({ name }) => {
-            return (<div>{ name }</div>);
+          {data.transactions.map(({_id, name }) => {
+            return (<div key={_id}>{ name }</div>);
           })}
           <input className='add-input' ref={node => input = node} />
           <button className='add-btn' type='submit'>add</button>
@@ -34,7 +48,7 @@ export const ListComponent = ({ transactions }) => {
         <div>
           <h2>No Transactions Found</h2>
         </div>
-        )
+      )
       }
     </div>
   );
