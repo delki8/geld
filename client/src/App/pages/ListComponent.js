@@ -27,8 +27,8 @@ export const ListComponent = ({ transactions }) => {
           {transactions.map(({ name }) => {
             return (<div>{ name }</div>);
           })}
-          <input ref={node => input = node} />
-          <button type='submit'>add</button>
+          <input className='add-input' ref={node => input = node} />
+          <button className='add-btn' type='submit'>add</button>
         </form>
       ) : (
         <div>

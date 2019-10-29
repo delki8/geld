@@ -6,9 +6,10 @@ const Home = () => {
     <div className='App'>
       <h1>Project Home</h1>
 
-      <Link to={'./list'}>
-        <button variant='raised'>
-          MyList
+      <Link to={'./transactions'}>
+        <button className='transactions-btn'
+                variant='raised'>
+          Transactions
         </button>
       </Link>
     </div>
